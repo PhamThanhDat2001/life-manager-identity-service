@@ -1,3 +1,16 @@
+server:
+  servlet:
+    context-path: /identity
+  port: 8080
+
 spring:
   application:
     name: identity-service
+  datasource:
+    url: "jdbc:mysql://localhost:3306/identity_service"
+    username: root
+    password: root
+  flyway:
+    locations: classpath:/db/migration
+    baseline-on-migrate: true
+    baseline-version: 0
