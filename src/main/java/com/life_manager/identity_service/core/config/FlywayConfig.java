@@ -1,4 +1,4 @@
-package com.life_manager.identity_service.config;
+package com.life_manager.identity_service.core.config;
 
 import org.flywaydb.core.Flyway;
 import org.springframework.beans.factory.annotation.Value;

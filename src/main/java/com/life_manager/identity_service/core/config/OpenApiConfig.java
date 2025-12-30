@@ -1,4 +1,4 @@
-package com.life_manager.identity_service.config;
+package com.life_manager.identity_service.core.config;
 
 import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.info.Info;
