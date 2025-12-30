@@ -1,4 +1,4 @@
-package com.life_manager.identity_service.auth.configuration;
+package com.life_manager.identity_service.config;
 
 import org.flywaydb.core.Flyway;
 import org.springframework.beans.factory.annotation.Value;
@@ -29,7 +29,7 @@ public class FlywayConfig {
                 .dataSource(dataSource())
                 .locations(flywayLocations)
                 .baselineOnMigrate(true)
-                .baselineVersion("0")
+                .baselineVersion("1")
                 .load();
         flyway.migrate();
         System.out.println("migration...");
