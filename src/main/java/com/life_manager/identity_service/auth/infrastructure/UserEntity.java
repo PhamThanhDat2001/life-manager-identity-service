@@ -1,6 +1,7 @@
 package com.life_manager.identity_service.auth.infrastructure;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.Setter;
 
