@@ -7,7 +7,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.context.request.WebRequest;
+
+import java.util.Objects;
 
 @ControllerAdvice
 public class GlobalExceptionHandler {
@@ -17,9 +18,32 @@ public class GlobalExceptionHandler {
     public ResponseEntity<ApiResponse<Object>> handleValidationException(
             MethodArgumentNotValidException exception
     ) {
+        String enumKey = exception.getFieldError().getDefaultMessage();
+
+        ErrorCode errorCode = ErrorCode.INVALID_KEY;
+
+        try {
+            errorCode = ErrorCode.valueOf(enumKey);
+
+        } catch (IllegalArgumentException e) {
+
+        }
+
         ApiResponse<Object> response = new ApiResponse<>();
-        response.setCode(HttpStatus.BAD_REQUEST.value());
-        response.setMessage(exception.getFieldError().getDefaultMessage());
+        response.setCode(errorCode.getCode());
+        response.setMessage(errorCode.getMessage());
+
+        return ResponseEntity.badRequest().body(response);
+    }
+
+    @ExceptionHandler(AppException.class)
+    public ResponseEntity<ApiResponse<Object>> handleAppException(
+            AppException exception
+    ) {
+        ErrorCode errorResponse = exception.getErrorCode();
+        ApiResponse<Object> response = new ApiResponse<>();
+        response.setCode(errorResponse.getCode());
+        response.setMessage(errorResponse.getMessage());
 
         return ResponseEntity.badRequest().body(response);
     }
@@ -43,13 +67,11 @@ public class GlobalExceptionHandler {
     }
 
     // Fallback - 500
-    @ExceptionHandler(RuntimeException.class)
-    public ResponseEntity<ApiResponse<Object>> handleRuntimeException(
-            RuntimeException exception
-    ) {
+    @ExceptionHandler(Exception.class)
+    public ResponseEntity<ApiResponse<Object>> handleRuntimeException() {
         ApiResponse<Object> response = new ApiResponse<>();
-        response.setCode(HttpStatus.INTERNAL_SERVER_ERROR.value());
-        response.setMessage(exception.getMessage());
+        response.setCode(ErrorCode.UNCATEGORIZED_EXCEPTION.getCode());
+        response.setMessage(ErrorCode.UNCATEGORIZED_EXCEPTION.getMessage());
 
         return ResponseEntity.internalServerError().body(response);
     }

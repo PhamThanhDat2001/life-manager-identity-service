@@ -23,25 +23,25 @@ public class FlywayConfig {
     @Value("${spring.datasource.password}")
     private String dataSourcePassword;
 
-    @Bean
-    public Flyway flyway() {
-        Flyway flyway = Flyway.configure()
-                .dataSource(dataSource())
-                .locations(flywayLocations)
-                .baselineOnMigrate(true)
-                .baselineVersion("1")
-                .load();
-        flyway.migrate();
-        System.out.println("migration...");
-        return flyway;
-    }
-
-    @Bean
-    public DataSource dataSource() {
-        DriverManagerDataSource dataSource = new DriverManagerDataSource();
-        dataSource.setUrl(dataSourceUrl);
-        dataSource.setUsername(dataSourceUsername);
-        dataSource.setPassword(dataSourcePassword);
-        return dataSource;
-    }
+//    @Bean
+//    public Flyway flyway() {
+//        Flyway flyway = Flyway.configure()
+//                .dataSource(dataSource())
+//                .locations(flywayLocations)
+//                .baselineOnMigrate(true)
+//                .baselineVersion("1")
+//                .load();
+//        flyway.migrate();
+//        System.out.println("migration...");
+//        return flyway;
+//    }
+//
+//    @Bean
+//    public DataSource dataSource() {
+//        DriverManagerDataSource dataSource = new DriverManagerDataSource();
+//        dataSource.setUrl(dataSourceUrl);
+//        dataSource.setUsername(dataSourceUsername);
+//        dataSource.setPassword(dataSourcePassword);
+//        return dataSource;
+//    }
 }

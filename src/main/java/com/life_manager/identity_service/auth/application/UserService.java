@@ -3,6 +3,8 @@ package com.life_manager.identity_service.auth.application;
 import com.life_manager.identity_service.auth.application.dto.CreateUserRequest;
 import com.life_manager.identity_service.auth.infrastructure.UserEntity;
 import com.life_manager.identity_service.auth.infrastructure.UserJpaRepository;
+import com.life_manager.identity_service.core.exeption.AppException;
+import com.life_manager.identity_service.core.exeption.ErrorCode;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -13,6 +15,9 @@ public class UserService {
 
     public UserEntity createUser(CreateUserRequest createUserRequest){
         UserEntity user = new UserEntity();
+        if (userJpaRepository.existsByUsername(createUserRequest.getUsername())){
+            throw new AppException(ErrorCode.USER_EXISTED);
+        }
         user.setUsername(createUserRequest.getUsername());
         user.setPassword(createUserRequest.getPassword());
         user.setLastName(createUserRequest.getLastName());
