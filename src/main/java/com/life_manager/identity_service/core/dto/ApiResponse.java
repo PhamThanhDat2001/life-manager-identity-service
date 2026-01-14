@@ -1,4 +1,4 @@
-package com.life_manager.identity_service.presentation.dto;
+package com.life_manager.identity_service.core.dto;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 

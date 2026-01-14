@@ -1,11 +1,13 @@
 package com.life_manager.identity_service.auth.application.dto;
 
 import jakarta.validation.constraints.Size;
-import lombok.Getter;
+import lombok.*;
 
 import java.time.LocalDate;
 
-@Getter
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class CreateUserRequest {
     @Size(min = 1, max = 50, message = "USERNAME_INVALID")
     private String username;
