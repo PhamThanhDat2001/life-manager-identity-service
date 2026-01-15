@@ -1,8 +1,8 @@
 package com.life_manager.identity_service.auth.application.service;
 
-import com.life_manager.identity_service.auth.application.dto.CreateUserRequest;
-import com.life_manager.identity_service.auth.application.dto.UpdateUserRequest;
-import com.life_manager.identity_service.auth.application.dto.UserResponse;
+import com.life_manager.identity_service.auth.application.dto.request.CreateUserRequest;
+import com.life_manager.identity_service.auth.application.dto.request.UpdateUserRequest;
+import com.life_manager.identity_service.auth.application.dto.response.UserResponse;
 import com.life_manager.identity_service.auth.application.mapper.UserMapper;
 import com.life_manager.identity_service.auth.infrastructure.UserEntity;
 import com.life_manager.identity_service.auth.infrastructure.UserJpaRepository;
@@ -11,8 +11,6 @@ import com.life_manager.identity_service.core.exeption.ErrorCode;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
-import org.apache.catalina.User;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;

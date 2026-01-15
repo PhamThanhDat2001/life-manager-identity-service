@@ -17,6 +17,7 @@ spring:
   jpa:
     show-sql: true
 open:
+  # http://localhost:8080/identity-service/swagger-ui/index.html#/user-controller
   api:
     title: API document
     description: description

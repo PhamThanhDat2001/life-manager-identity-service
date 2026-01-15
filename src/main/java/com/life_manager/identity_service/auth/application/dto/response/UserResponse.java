@@ -1,7 +1,6 @@
-package com.life_manager.identity_service.auth.application.dto;
+package com.life_manager.identity_service.auth.application.dto.response;
 
 import java.time.LocalDate;
-import java.util.Set;
 
 import lombok.*;
 import lombok.experimental.FieldDefaults;

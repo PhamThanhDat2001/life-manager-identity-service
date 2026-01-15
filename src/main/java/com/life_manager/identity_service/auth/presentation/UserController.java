@@ -1,10 +1,9 @@
 package com.life_manager.identity_service.auth.presentation;
 
-import com.life_manager.identity_service.auth.application.dto.UpdateUserRequest;
-import com.life_manager.identity_service.auth.application.dto.UserResponse;
+import com.life_manager.identity_service.auth.application.dto.request.UpdateUserRequest;
+import com.life_manager.identity_service.auth.application.dto.response.UserResponse;
 import com.life_manager.identity_service.auth.application.service.UserService;
-import com.life_manager.identity_service.auth.application.dto.CreateUserRequest;
-import com.life_manager.identity_service.auth.infrastructure.UserEntity;
+import com.life_manager.identity_service.auth.application.dto.request.CreateUserRequest;
 import com.life_manager.identity_service.core.dto.ApiResponse;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
