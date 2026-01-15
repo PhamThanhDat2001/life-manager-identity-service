@@ -1,9 +1,9 @@
-package com.life_manager.identity_service.presentation;
+package com.life_manager.identity_service.auth.presentation;
 
-import com.life_manager.identity_service.auth.application.UserService;
+import com.life_manager.identity_service.auth.application.service.UserService;
 import com.life_manager.identity_service.auth.application.dto.CreateUserRequest;
 import com.life_manager.identity_service.auth.infrastructure.UserEntity;
-import com.life_manager.identity_service.presentation.dto.ApiResponse;
+import com.life_manager.identity_service.core.dto.ApiResponse;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;

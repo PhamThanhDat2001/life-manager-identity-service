@@ -2,10 +2,10 @@ package com.life_manager.identity_service.auth.infrastructure;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Size;
-import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.experimental.FieldDefaults;
 
 import java.time.LocalDate;
 
@@ -13,6 +13,8 @@ import java.time.LocalDate;
 @Getter
 @Setter
 @Table(name = "users")
+@AllArgsConstructor
+@NoArgsConstructor
 public class UserEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)

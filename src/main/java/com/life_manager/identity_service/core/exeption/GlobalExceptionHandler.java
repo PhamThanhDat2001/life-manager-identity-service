@@ -1,14 +1,12 @@
 package com.life_manager.identity_service.core.exeption;
 
-import com.life_manager.identity_service.presentation.dto.ApiResponse;
+import com.life_manager.identity_service.core.dto.ApiResponse;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-
-import java.util.Objects;
 
 @ControllerAdvice
 public class GlobalExceptionHandler {
