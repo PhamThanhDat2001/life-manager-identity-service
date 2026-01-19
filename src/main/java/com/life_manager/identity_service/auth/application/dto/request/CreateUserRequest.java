@@ -1,4 +1,4 @@
-package com.life_manager.identity_service.auth.application.dto;
+package com.life_manager.identity_service.auth.application.dto.request;
 
 import jakarta.validation.constraints.Size;
 import lombok.*;
