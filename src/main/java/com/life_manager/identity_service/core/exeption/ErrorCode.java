@@ -3,7 +3,6 @@ package com.life_manager.identity_service.core.exeption;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import org.springframework.http.HttpStatus;
 
 @AllArgsConstructor
 @Getter
@@ -13,6 +12,8 @@ public enum ErrorCode {
     PASSWORD_INVALID(1003, "Password is invalid"),
     USER_EXISTED(1001,"User existed"),
     USER_NOT_EXISTED(1005, "User not existed"),
+    UNAUTHENTICATED(1006, "Unauthenticated"),
+
     INVALID_KEY(1003, "Uncategorized error");
 
     private final int code;

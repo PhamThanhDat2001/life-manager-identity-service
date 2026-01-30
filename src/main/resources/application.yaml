@@ -22,3 +22,5 @@ open:
     title: API document
     description: description
     version: v1.0.0
+jwt:
+  signerKey: 24c0c34b24d56d2f9ff1a0de0433f7ff48e22aea8b8fec93b5f4a4298c88e431

@@ -1,4 +1,4 @@
-package com.life_manager.identity_service.auth.application.dto.response;
+package com.life_manager.identity_service.auth.application.dto.request;
 
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -8,6 +8,7 @@ import lombok.experimental.FieldDefaults;
 @Data
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Builder
-public class AuthenticationResponse {
+public class IntrospectRequest {
     String token;
 }
+
