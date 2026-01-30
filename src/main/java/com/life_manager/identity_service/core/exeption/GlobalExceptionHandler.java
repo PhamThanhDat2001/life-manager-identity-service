@@ -1,12 +1,16 @@
 package com.life_manager.identity_service.core.exeption;
 
 import com.life_manager.identity_service.core.dto.ApiResponse;
+import jakarta.validation.ConstraintViolation;
+import jakarta.validation.ConstraintViolationException;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+
+import java.time.Instant;
 
 @ControllerAdvice
 public class GlobalExceptionHandler {
@@ -73,4 +77,36 @@ public class GlobalExceptionHandler {
 
         return ResponseEntity.internalServerError().body(response);
     }
+
+//    // ===== VALIDATION (PARAM / PATH) =====
+//    @ExceptionHandler(ConstraintViolationException.class)
+//    public ResponseEntity<ApiResponse<Void>> handleConstraintViolation(
+//            ConstraintViolationException ex) {
+//
+//        ConstraintViolation<?> violation =
+//                ex.getConstraintViolations().stream().findFirst().orElse(null);
+//
+//        return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+//                .body(
+//                        ApiResponse.<Void>builder()
+//                                .timestamp(Instant.now())
+//                                .error(
+//                                        ApiError.builder()
+//                                                .code(ErrorCode.VALIDATION_ERROR.getCode())
+//                                                .message(ErrorCode.VALIDATION_ERROR.getMessage())
+//                                                .details(
+//                                                        violation != null
+//                                                                ? Details.builder()
+//                                                                .field(
+//                                                                        violation
+//                                                                                .getPropertyPath()
+//                                                                                .toString())
+//                                                                .reason(
+//                                                                        violation
+//                                                                                .getMessage())
+//                                                                .build()
+//                                                                : null)
+//                                                .build())
+//                                .build());
+//    }
 }
