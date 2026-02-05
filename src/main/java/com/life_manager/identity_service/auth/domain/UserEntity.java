@@ -8,6 +8,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDate;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Getter
@@ -25,4 +27,12 @@ public class UserEntity {
     private String lastName;
     private LocalDate dob;
 
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+    private Set<UserRoleEntity> roles = new HashSet<>();
+
+    public void addDefaultRoles(RoleEntity role) {
+        UserRoleEntity userRoleEntity = new UserRoleEntity();
+        userRoleEntity.setUser(this);
+        userRoleEntity.setRole(role);
+    }
 }
