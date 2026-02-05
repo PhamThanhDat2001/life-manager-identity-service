@@ -69,14 +69,14 @@ public class GlobalExceptionHandler {
     }
 
     // Fallback - 500
-    @ExceptionHandler(Exception.class)
-    public ResponseEntity<ApiResponse<Object>> handleRuntimeException() {
-        ApiResponse<Object> response = new ApiResponse<>();
-        response.setCode(ErrorCode.UNCATEGORIZED_EXCEPTION.getCode());
-        response.setMessage(ErrorCode.UNCATEGORIZED_EXCEPTION.getMessage());
-
-        return ResponseEntity.internalServerError().body(response);
-    }
+//    @ExceptionHandler(Exception.class)
+//    public ResponseEntity<ApiResponse<Object>> handleRuntimeException() {
+//        ApiResponse<Object> response = new ApiResponse<>();
+//        response.setCode(ErrorCode.UNCATEGORIZED_EXCEPTION.getCode());
+//        response.setMessage(ErrorCode.UNCATEGORIZED_EXCEPTION.getMessage());
+//
+//        return ResponseEntity.internalServerError().body(response);
+//    }
 
 //    // ===== VALIDATION (PARAM / PATH) =====
 //    @ExceptionHandler(ConstraintViolationException.class)
