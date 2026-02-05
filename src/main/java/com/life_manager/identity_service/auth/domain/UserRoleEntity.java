@@ -1,4 +1,4 @@
-package com.life_manager.identity_service.auth.infrastructure;
+package com.life_manager.identity_service.auth.domain;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

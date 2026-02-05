@@ -1,4 +1,4 @@
-package com.life_manager.identity_service.auth.infrastructure;
+package com.life_manager.identity_service.auth.domain;
 
 import com.life_manager.identity_service.auth.application.enums.Role;
 import jakarta.persistence.*;

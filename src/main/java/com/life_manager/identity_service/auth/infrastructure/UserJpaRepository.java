@@ -1,11 +1,8 @@
 package com.life_manager.identity_service.auth.infrastructure;
 
+import com.life_manager.identity_service.auth.domain.UserEntity;
+import com.life_manager.identity_service.auth.domain.UserRepository;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import java.util.Optional;
-
-public interface UserJpaRepository extends JpaRepository<UserEntity, String> {
-    boolean existsByUsername(String username);
-
-    Optional<UserEntity> findByUsername(String username);
+public interface UserJpaRepository extends JpaRepository<UserEntity, String>, UserRepository {
 }
