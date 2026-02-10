@@ -1,16 +1,13 @@
-package com.life_manager.identity_service.core.exeption;
+package com.life_manager.identity_service.core.exception;
 
 import com.life_manager.identity_service.core.dto.ApiResponse;
-import jakarta.validation.ConstraintViolation;
-import jakarta.validation.ConstraintViolationException;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-
-import java.time.Instant;
 
 @ControllerAdvice
 public class GlobalExceptionHandler {
@@ -47,7 +44,19 @@ public class GlobalExceptionHandler {
         response.setCode(errorResponse.getCode());
         response.setMessage(errorResponse.getMessage());
 
-        return ResponseEntity.badRequest().body(response);
+        return ResponseEntity.status(errorResponse.getStatusCode()).body(response);
+    }
+
+    @ExceptionHandler(AccessDeniedException.class)
+    public ResponseEntity<ApiResponse<Object>> handleAccessDeniedException(
+            AccessDeniedException exception
+    ) {
+        ErrorCode errorResponse = ErrorCode.UNAUTHORIZED;
+        ApiResponse<Object> response = new ApiResponse<>();
+        response.setCode(errorResponse.getCode());
+        response.setMessage(errorResponse.getMessage());
+
+        return ResponseEntity.status(errorResponse.getStatusCode()).body(response);
     }
 
     // Data integrity - 409

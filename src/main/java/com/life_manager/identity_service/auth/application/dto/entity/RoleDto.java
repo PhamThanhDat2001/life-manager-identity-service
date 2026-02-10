@@ -5,9 +5,12 @@ import lombok.Data;
 import lombok.Getter;
 import lombok.experimental.FieldDefaults;
 
+import java.util.Set;
+
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Getter
 public class RoleDto {
      Long id;
      String name;
+    private Set<PermissionDto> permissions; // flatten
 }

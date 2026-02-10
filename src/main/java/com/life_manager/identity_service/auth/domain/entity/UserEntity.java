@@ -1,4 +1,4 @@
-package com.life_manager.identity_service.auth.domain;
+package com.life_manager.identity_service.auth.domain.entity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -28,6 +28,6 @@ public class UserEntity {
     private String lastName;
     private LocalDate dob;
 
-    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
-    private List<UserRoleEntity> roles = new ArrayList<>();
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<UserRoleEntity> roles = new HashSet<>();
 }
