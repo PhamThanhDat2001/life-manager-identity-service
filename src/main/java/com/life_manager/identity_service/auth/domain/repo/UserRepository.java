@@ -15,4 +15,8 @@ public interface UserRepository {
     Optional<UserEntity> findById(String id);
 
     List<UserEntity> findAll();
+
+    void flush();
+
+    List<UserEntity> findAllWithRolesAndPermissions();
 }

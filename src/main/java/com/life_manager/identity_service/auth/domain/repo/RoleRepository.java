@@ -6,6 +6,7 @@ import com.life_manager.identity_service.auth.domain.entity.RoleEntity;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 public interface RoleRepository {
     Optional<RoleEntity> findByRole(Role role);
@@ -15,4 +16,6 @@ public interface RoleRepository {
     RoleEntity save(RoleEntity roleEntity);
 
     List<RoleEntity> findAllWithPermissions();
+
+    Set<RoleEntity> findByRoleIn(Set<String> roles);
 }

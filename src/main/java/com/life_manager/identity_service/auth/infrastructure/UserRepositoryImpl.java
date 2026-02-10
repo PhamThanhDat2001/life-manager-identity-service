@@ -39,5 +39,15 @@ public class UserRepositoryImpl implements UserRepository {
     public List<UserEntity> findAll() {
         return userJpaRepository.findAll();
     }
+
+    @Override
+    public void flush() {
+        userJpaRepository.flush();
+    }
+
+    @Override
+    public List<UserEntity> findAllWithRolesAndPermissions() {
+        return userJpaRepository.findAllWithRolesAndPermissions();
+    }
 }
 

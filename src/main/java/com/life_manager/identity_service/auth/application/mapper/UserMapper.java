@@ -4,7 +4,9 @@ import com.life_manager.identity_service.auth.application.dto.request.UpdateUser
 import com.life_manager.identity_service.auth.application.dto.response.UserResponse;
 import com.life_manager.identity_service.auth.domain.entity.UserEntity;
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;
+import org.mapstruct.Mappings;
 
 import java.util.List;
 
@@ -12,8 +14,10 @@ import java.util.List;
 public interface UserMapper {
     UserEntity toUser(CreateUserRequest createUserRequest);
 
+    @Mapping(target = "roles", ignore = true)
     void updateUser(@MappingTarget UserEntity user, UpdateUserRequest updateUserRequest);
 
+    @Mapping(target = "roles", ignore = true)
     UserResponse toUserResponse(UserEntity user);
 
     List<UserResponse> toListUserResponse(List<UserEntity> user);

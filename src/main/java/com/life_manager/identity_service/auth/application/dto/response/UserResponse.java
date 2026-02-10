@@ -1,6 +1,8 @@
 package com.life_manager.identity_service.auth.application.dto.response;
 
 import java.time.LocalDate;
+import java.util.HashSet;
+import java.util.Set;
 
 import lombok.*;
 import lombok.experimental.FieldDefaults;
@@ -16,4 +18,5 @@ public class UserResponse {
     String firstName;
     String lastName;
     LocalDate dob;
+    Set<RoleResponse> roles;
 }
