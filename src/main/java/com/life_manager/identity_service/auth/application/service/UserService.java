@@ -4,13 +4,16 @@ import com.life_manager.identity_service.auth.application.dto.request.CreateUser
 import com.life_manager.identity_service.auth.application.dto.request.UpdateUserRequest;
 import com.life_manager.identity_service.auth.application.dto.response.UserResponse;
 import com.life_manager.identity_service.auth.application.mapper.UserMapper;
-import com.life_manager.identity_service.auth.domain.UserRepository;
-import com.life_manager.identity_service.auth.domain.UserEntity;
+import com.life_manager.identity_service.auth.domain.repo.UserRepository;
+import com.life_manager.identity_service.auth.domain.entity.UserEntity;
 import com.life_manager.identity_service.core.exeption.AppException;
 import com.life_manager.identity_service.core.exeption.ErrorCode;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
+import org.springframework.security.access.prepost.PostAuthorize;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -24,7 +27,8 @@ public class UserService {
     UserRepository userRepository;
     UserMapper userMapper;
     PasswordEncoder passwordEncoder;
-    RoleService roleService;
+    IRoleService roleService;
+
 
     @Transactional
     public UserResponse createUser(CreateUserRequest createUserRequest){
@@ -47,12 +51,23 @@ public class UserService {
         return userMapper.toUserResponse(userRepository.save(user));
     }
 
+    @PostAuthorize("returnObject.username == authentication.name")
     public UserResponse getUser(String id) {
         return userMapper.toUserResponse(
                 userRepository.findById(id).orElseThrow(() -> new AppException(ErrorCode.USER_NOT_EXISTED)));
     }
 
+//    @PreAuthorize("#id == authentication.name or hasRole('ADMIN')")
+    @PreAuthorize("hasRole('ADMIN')")
     public List<UserResponse> getAllUser() {
         return userMapper.toListUserResponse(userRepository.findAll());
+    }
+
+    public UserResponse getMyInfo(){
+        var context = SecurityContextHolder.getContext().getAuthentication();
+        String name = context.getName();
+        UserEntity user = userRepository.findByUsername(name).orElseThrow(
+                () -> new AppException(ErrorCode.USER_NOT_EXISTED));
+        return userMapper.toUserResponse(user);
     }
 }

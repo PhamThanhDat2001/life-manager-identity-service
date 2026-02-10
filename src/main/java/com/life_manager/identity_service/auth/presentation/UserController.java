@@ -38,10 +38,17 @@ public class UserController {
         return apiResponse;
     }
 
-    @GetMapping("")
+    @GetMapping()
     public ApiResponse<List<UserResponse>> getAll(){
         ApiResponse<List<UserResponse>> apiResponse = new ApiResponse<>();
         apiResponse.setResult(userService.getAllUser());
+        return apiResponse;
+    }
+
+    @GetMapping("/my-info")
+    public ApiResponse<UserResponse> getMyInfo(){
+        ApiResponse<UserResponse> apiResponse = new ApiResponse<>();
+        apiResponse.setResult(userService.getMyInfo());
         return apiResponse;
     }
 }

@@ -1,4 +1,4 @@
-package com.life_manager.identity_service.auth.domain;
+package com.life_manager.identity_service.auth.domain.entity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -8,9 +8,7 @@ import lombok.Setter;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 @Entity
 @Getter

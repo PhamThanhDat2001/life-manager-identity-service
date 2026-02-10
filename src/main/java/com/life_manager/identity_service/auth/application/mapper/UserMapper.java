@@ -2,7 +2,7 @@ package com.life_manager.identity_service.auth.application.mapper;
 import com.life_manager.identity_service.auth.application.dto.request.CreateUserRequest;
 import com.life_manager.identity_service.auth.application.dto.request.UpdateUserRequest;
 import com.life_manager.identity_service.auth.application.dto.response.UserResponse;
-import com.life_manager.identity_service.auth.domain.UserEntity;
+import com.life_manager.identity_service.auth.domain.entity.UserEntity;
 import org.mapstruct.Mapper;
 import org.mapstruct.MappingTarget;
 

@@ -1,15 +1,14 @@
-package com.life_manager.identity_service.auth.domain;
+package com.life_manager.identity_service.auth.domain.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @Entity
-@Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "user_roles")
+@Getter
+@Setter
 public class UserRoleEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

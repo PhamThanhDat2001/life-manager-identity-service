@@ -4,7 +4,7 @@ import com.life_manager.identity_service.auth.application.dto.request.Authentica
 import com.life_manager.identity_service.auth.application.dto.request.IntrospectRequest;
 import com.life_manager.identity_service.auth.application.dto.response.AuthenticationResponse;
 import com.life_manager.identity_service.auth.application.dto.response.IntrospectResponse;
-import com.life_manager.identity_service.auth.domain.UserEntity;
+import com.life_manager.identity_service.auth.domain.entity.UserEntity;
 import com.life_manager.identity_service.auth.infrastructure.UserJpaRepository;
 import com.life_manager.identity_service.core.exeption.AppException;
 import com.life_manager.identity_service.core.exeption.ErrorCode;

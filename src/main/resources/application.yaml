@@ -13,7 +13,7 @@ spring:
   flyway:
     locations: classpath:/db/migration
     baseline-on-migrate: true
-    baseline-version: 2
+    baseline-version: 5
   jpa:
     show-sql: true
 open:
