@@ -4,7 +4,7 @@ import com.life_manager.identity_service.auth.application.dto.request.CreatePerm
 import com.life_manager.identity_service.auth.application.dto.response.PermissionResponse;
 import com.life_manager.identity_service.auth.application.mapper.PermissionMapper;
 import com.life_manager.identity_service.auth.domain.entity.PermissionEntity;
-import com.life_manager.identity_service.auth.infrastructure.PermissionJpaRepository;
+import com.life_manager.identity_service.auth.infrastructure.jpa.PermissionJpaRepository;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;

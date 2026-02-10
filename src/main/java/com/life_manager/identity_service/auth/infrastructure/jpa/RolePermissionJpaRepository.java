@@ -1,4 +1,4 @@
-package com.life_manager.identity_service.auth.infrastructure;
+package com.life_manager.identity_service.auth.infrastructure.jpa;
 
 import com.life_manager.identity_service.auth.domain.entity.RolePermissionEntity;
 import com.life_manager.identity_service.auth.domain.entity.RolePermissionId;

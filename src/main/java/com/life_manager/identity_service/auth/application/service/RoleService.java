@@ -10,7 +10,7 @@ import com.life_manager.identity_service.auth.domain.repo.PermissionRepository;
 import com.life_manager.identity_service.auth.domain.repo.RolePermissionRepository;
 import com.life_manager.identity_service.auth.domain.repo.RoleRepository;
 import com.life_manager.identity_service.auth.domain.repo.UserRoleRepository;
-import com.life_manager.identity_service.auth.infrastructure.*;
+import com.life_manager.identity_service.auth.infrastructure.jpa.PermissionJpaRepository;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;

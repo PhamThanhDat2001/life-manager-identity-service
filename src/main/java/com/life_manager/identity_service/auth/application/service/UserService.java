@@ -4,7 +4,7 @@ import com.life_manager.identity_service.auth.application.dto.request.CreateUser
 import com.life_manager.identity_service.auth.application.dto.request.UpdateUserRequest;
 import com.life_manager.identity_service.auth.application.dto.response.UserResponse;
 import com.life_manager.identity_service.auth.application.mapper.UserMapper;
-import com.life_manager.identity_service.auth.domain.repo.UserRepository;
+import com.life_manager.identity_service.auth.domain.repo.IUserRepository;
 import com.life_manager.identity_service.auth.domain.entity.UserEntity;
 import com.life_manager.identity_service.core.exeption.AppException;
 import com.life_manager.identity_service.core.exeption.ErrorCode;
@@ -24,7 +24,7 @@ import java.util.List;
 @RequiredArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class UserService {
-    UserRepository userRepository;
+    IUserRepository userRepository;
     UserMapper userMapper;
     PasswordEncoder passwordEncoder;
     IRoleService roleService;

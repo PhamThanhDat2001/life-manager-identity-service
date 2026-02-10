@@ -5,7 +5,7 @@ import com.life_manager.identity_service.auth.application.dto.request.Introspect
 import com.life_manager.identity_service.auth.application.dto.response.AuthenticationResponse;
 import com.life_manager.identity_service.auth.application.dto.response.IntrospectResponse;
 import com.life_manager.identity_service.auth.domain.entity.UserEntity;
-import com.life_manager.identity_service.auth.infrastructure.UserJpaRepository;
+import com.life_manager.identity_service.auth.domain.repo.IUserRepository;
 import com.life_manager.identity_service.core.exeption.AppException;
 import com.life_manager.identity_service.core.exeption.ErrorCode;
 import com.nimbusds.jose.*;
@@ -33,15 +33,16 @@ import java.util.StringJoiner;
 @RequiredArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class AuthenticationService {
-    UserJpaRepository userJpaRepository;
+    IUserRepository userRepository;
+    PasswordEncoder passwordEncoder;
+
     @NonFinal
     @Value("${jwt.signerKey}")
     protected String SIGNED_KEY;
     public AuthenticationResponse isAuthenticated(AuthenticationRequest authenticationRequest) {
 
-        UserEntity user = userJpaRepository.findByUsername(authenticationRequest.getUsername()).orElseThrow(() -> new AppException(ErrorCode.USER_NOT_EXISTED));
+        UserEntity user = userRepository.findByUsername(authenticationRequest.getUsername()).orElseThrow(() -> new AppException(ErrorCode.USER_NOT_EXISTED));
 
-        PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         boolean authenticated = passwordEncoder.matches(authenticationRequest.getPassword(), user.getPassword());
 
         if (!authenticated) {
@@ -80,7 +81,7 @@ public class AuthenticationService {
     private String buildScope(UserEntity user) {
         StringJoiner stringJoiner = new StringJoiner(" ");
         if (!CollectionUtils.isEmpty(user.getRoles())) {
-            user.getRoles().forEach(role -> stringJoiner.add(role.getRole().getRole().name()));
+            user.getRoles().forEach(role -> stringJoiner.add(role.getRole().getRole()));
         }
         return stringJoiner.toString();
     }
