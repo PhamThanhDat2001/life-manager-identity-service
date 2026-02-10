@@ -5,9 +5,9 @@ import com.life_manager.identity_service.auth.application.dto.request.Introspect
 import com.life_manager.identity_service.auth.application.dto.response.AuthenticationResponse;
 import com.life_manager.identity_service.auth.application.dto.response.IntrospectResponse;
 import com.life_manager.identity_service.auth.domain.entity.UserEntity;
-import com.life_manager.identity_service.auth.domain.repo.IUserRepository;
-import com.life_manager.identity_service.core.exeption.AppException;
-import com.life_manager.identity_service.core.exeption.ErrorCode;
+import com.life_manager.identity_service.auth.domain.repo.UserRepository;
+import com.life_manager.identity_service.core.exception.AppException;
+import com.life_manager.identity_service.core.exception.ErrorCode;
 import com.nimbusds.jose.*;
 import com.nimbusds.jose.crypto.MACSigner;
 import com.nimbusds.jose.crypto.MACVerifier;
@@ -18,7 +18,6 @@ import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import lombok.experimental.NonFinal;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
@@ -33,7 +32,7 @@ import java.util.StringJoiner;
 @RequiredArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class AuthenticationService {
-    IUserRepository userRepository;
+    UserRepository userRepository;
     PasswordEncoder passwordEncoder;
 
     @NonFinal

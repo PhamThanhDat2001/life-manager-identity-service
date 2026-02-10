@@ -1,4 +1,4 @@
-package com.life_manager.identity_service.core.exeption;
+package com.life_manager.identity_service.core.exception;
 
 
 import lombok.AllArgsConstructor;

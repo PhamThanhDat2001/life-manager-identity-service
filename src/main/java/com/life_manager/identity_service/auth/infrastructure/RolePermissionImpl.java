@@ -9,7 +9,7 @@ import java.util.List;
 
 @Repository
 @RequiredArgsConstructor
-public class RolePermissionRepo implements com.life_manager.identity_service.auth.domain.repo.RolePermissionRepository {
+public class RolePermissionImpl implements com.life_manager.identity_service.auth.domain.repo.RolePermissionRepository {
 
     private final RolePermissionJpaRepository jpa;
 

@@ -4,6 +4,7 @@ import com.life_manager.identity_service.auth.application.enums.Role;
 import com.life_manager.identity_service.auth.domain.entity.RoleEntity;
 
 
+import java.util.List;
 import java.util.Optional;
 
 public interface RoleRepository {
@@ -12,4 +13,6 @@ public interface RoleRepository {
     Optional<RoleEntity> findById(Long roleId);
 
     RoleEntity save(RoleEntity roleEntity);
+
+    List<RoleEntity> findAllWithPermissions();
 }

@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/v1/roles")
@@ -30,10 +32,10 @@ public class RoleController {
 //    }
 //
 //    // READ ALL
-//    @GetMapping
-//    public ApiResponse<List<RoleResponse>> getAllRoles() {
-//        return ApiResponse.fromData(roleService.getAllRoles());
-//    }
+    @GetMapping
+    public ApiResponse<List<RoleResponse>> getAllRoles() {
+        return ApiResponse.fromData(roleService.getAllRoles());
+    }
 //
 //    // UPDATE
 //    @PutMapping("/{id}")

@@ -1,7 +1,7 @@
 package com.life_manager.identity_service.auth.infrastructure;
 
 import com.life_manager.identity_service.auth.domain.entity.UserEntity;
-import com.life_manager.identity_service.auth.domain.repo.IUserRepository;
+import com.life_manager.identity_service.auth.domain.repo.UserRepository;
 import com.life_manager.identity_service.auth.infrastructure.jpa.UserJpaRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
@@ -11,7 +11,7 @@ import java.util.Optional;
 
 @Repository
 @RequiredArgsConstructor
-public class UserRepo implements IUserRepository {
+public class UserRepositoryImpl implements UserRepository {
 
     private final UserJpaRepository userJpaRepository;
 

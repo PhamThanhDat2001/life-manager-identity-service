@@ -1,6 +1,7 @@
 package com.life_manager.identity_service.auth.application.service;
 
 import com.life_manager.identity_service.auth.application.dto.request.CreateRoleRequest;
+import com.life_manager.identity_service.auth.application.dto.response.PermissionResponse;
 import com.life_manager.identity_service.auth.application.dto.response.RoleResponse;
 import com.life_manager.identity_service.auth.application.enums.Permission;
 import com.life_manager.identity_service.auth.application.enums.Role;
@@ -10,7 +11,6 @@ import com.life_manager.identity_service.auth.domain.repo.PermissionRepository;
 import com.life_manager.identity_service.auth.domain.repo.RolePermissionRepository;
 import com.life_manager.identity_service.auth.domain.repo.RoleRepository;
 import com.life_manager.identity_service.auth.domain.repo.UserRoleRepository;
-import com.life_manager.identity_service.auth.infrastructure.jpa.PermissionJpaRepository;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
@@ -24,26 +24,13 @@ import java.util.stream.Collectors;
 @Service
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 @RequiredArgsConstructor
-public class RoleService implements IRoleService {
+public class RoleService {
     UserRoleRepository userRoleRepository;
     RoleMapper roleMapper;
-    PermissionJpaRepository permissionJpaRepository;
     RolePermissionRepository rolePermissionRepository;
     RoleRepository roleRepository;
     PermissionRepository permissionRepository;
 
-//    @Override
-//    @Transactional
-//    public void assignDefaultRoles(UserEntity user) {
-//
-//        RoleEntity roleUser = roleJpaRepository.findByRole(Role.USER)
-//                .orElseThrow();
-//
-//        user.addDefaultRoles(roleUser);
-//
-//    }
-
-    @Override
     @Transactional
     public void assignDefaultRoles(UserEntity user) {
         RoleEntity roleUser = roleRepository.findByRole(Role.USER)
@@ -53,15 +40,10 @@ public class RoleService implements IRoleService {
         userRoleEntity.setUser(user);
         userRoleEntity.setRole(roleUser);
 
-//        if (user.getRoles() == null) {
-//            user.setRoles(new HashSet<>());
-//        }
-//        user.getRoles().add(userRoleEntity);
 
         userRoleRepository.save(userRoleEntity);
     }
 
-//    @Override
     @Transactional
     public void addPermissionToRole(Long roleId, Set<Long> permissionIds) {
 
@@ -96,4 +78,27 @@ public class RoleService implements IRoleService {
 
         return roleMapper.toRoleResponse(saved);
     }
+
+    public List<RoleResponse> getAllRoles() {
+        List<RoleEntity> roles = roleRepository.findAllWithPermissions();
+
+        return roles.stream().map(role -> {
+            Set<PermissionResponse> permissions = role.getRolePermissions()
+                    .stream()
+                    .map(rp -> {
+                        PermissionEntity p = rp.getPermission();
+                        return new PermissionResponse(
+                                p.getPermission().name(),
+                                p.getDescription()
+                        );
+                    })
+                    .collect(Collectors.toSet());
+
+            return RoleResponse.builder()
+                    .role(role.getRole())
+                    .permissions(permissions)
+                    .build();
+        }).toList();
+    }
+
 }
