@@ -21,4 +21,9 @@ public class ApiResponse<T> {
     private T result;
 
     private Instant timestamp = Instant.now();
+
+
+    public static <T> ApiResponse<T> fromData(T data){
+        return  ApiResponse.<T>builder().result(data).build();
+    }
 }

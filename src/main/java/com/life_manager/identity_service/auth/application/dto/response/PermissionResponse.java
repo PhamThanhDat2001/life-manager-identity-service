@@ -1,9 +1,5 @@
 package com.life_manager.identity_service.auth.application.dto.response;
 
-import java.time.LocalDate;
-import java.util.HashSet;
-import java.util.Set;
-
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
@@ -12,11 +8,7 @@ import lombok.experimental.FieldDefaults;
 @AllArgsConstructor
 @Builder
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class UserResponse {
-    String id;
-    String username;
-    String firstName;
-    String lastName;
-    LocalDate dob;
-    Set<RoleResponse> roles;
+public class PermissionResponse {
+    String name;
+    String description;
 }
