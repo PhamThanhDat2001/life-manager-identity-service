@@ -9,7 +9,7 @@ import java.util.Optional;
 import java.util.Set;
 
 public interface RoleRepository {
-    Optional<RoleEntity> findByRole(Role role);
+    Optional<RoleEntity> findByRole(String role);
 
     Optional<RoleEntity> findById(Long roleId);
 

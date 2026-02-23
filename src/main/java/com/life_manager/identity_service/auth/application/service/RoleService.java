@@ -33,7 +33,7 @@ public class RoleService {
 
     @Transactional
     public void assignDefaultRoles(UserEntity user) {
-        RoleEntity roleUser = roleRepository.findByRole(Role.USER)
+        RoleEntity roleUser = roleRepository.findByRole(Role.USER.name())
                 .orElseThrow();
 
         UserRoleEntity userRoleEntity = new UserRoleEntity();
