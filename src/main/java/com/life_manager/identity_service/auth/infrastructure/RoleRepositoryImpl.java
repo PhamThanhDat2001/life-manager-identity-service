@@ -18,7 +18,7 @@ public class RoleRepositoryImpl implements RoleRepository {
    private final RoleJpaRepository roleJpaRepository;
 
     @Override
-    public Optional<RoleEntity> findByRole(Role role) {
+    public Optional<RoleEntity> findByRole(String role) {
         return roleJpaRepository.findByRole(role);
     }
 

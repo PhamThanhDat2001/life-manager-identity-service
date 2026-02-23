@@ -19,7 +19,7 @@ public interface RoleJpaRepository extends JpaRepository<RoleEntity, Long> {
 """)
     List<RoleEntity> findAllWithPermissions();
 
-    Optional<RoleEntity> findByRole(Role role);
+    Optional<RoleEntity> findByRole(String role);
 
     Set<RoleEntity> findByRoleIn(Set<String> roles);
 }
