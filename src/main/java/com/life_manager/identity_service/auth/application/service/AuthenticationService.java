@@ -2,6 +2,7 @@ package com.life_manager.identity_service.auth.application.service;
 
 import com.life_manager.identity_service.auth.application.dto.request.AuthenticationRequest;
 import com.life_manager.identity_service.auth.application.dto.request.IntrospectRequest;
+import com.life_manager.identity_service.auth.application.dto.request.LogoutRequest;
 import com.life_manager.identity_service.auth.application.dto.response.AuthenticationResponse;
 import com.life_manager.identity_service.auth.application.dto.response.IntrospectResponse;
 import com.life_manager.identity_service.auth.domain.entity.UserEntity;
@@ -27,6 +28,7 @@ import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 import java.util.Date;
 import java.util.StringJoiner;
+import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
@@ -62,6 +64,7 @@ public class AuthenticationService {
                 .expirationTime(new Date(Instant.now().plus(1, ChronoUnit.HOURS).toEpochMilli()))
                 .claim("userId","Custom")
                 .claim("scope", buildScope(user))
+                .jwtID(UUID.randomUUID().toString())
                 .build();
 
         Payload payload = new Payload(jwtClaimsSet.toJSONObject());
@@ -98,12 +101,28 @@ public class AuthenticationService {
 
         SignedJWT signedJWT = SignedJWT.parse(token);
 
-        Date expityTime = signedJWT.getJWTClaimsSet().getExpirationTime();
+        Date expiryTime = signedJWT.getJWTClaimsSet().getExpirationTime();
 
         var verified = signedJWT.verify(jwsVerifier);
 
         return IntrospectResponse.builder()
-                .valid(verified && expityTime.after(new Date())).build();
+                .valid(verified && expiryTime.after(new Date())).build();
 
+    }
+
+    public void logout(LogoutRequest request) {
+
+    }
+
+    private SignedJWT verifyToken(String token) throws JOSEException, ParseException {
+        JWSVerifier jwsVerifier = new MACVerifier(SIGNED_KEY.getBytes());
+
+        SignedJWT signedJWT = SignedJWT.parse(token);
+
+        Date expiryTime = signedJWT.getJWTClaimsSet().getExpirationTime();
+
+        var verified = signedJWT.verify(jwsVerifier);
+
+        return signedJWT;
     }
 }
