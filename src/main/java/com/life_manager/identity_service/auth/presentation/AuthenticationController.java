@@ -2,6 +2,8 @@ package com.life_manager.identity_service.auth.presentation;
 
 import com.life_manager.identity_service.auth.application.dto.request.AuthenticationRequest;
 import com.life_manager.identity_service.auth.application.dto.request.IntrospectRequest;
+import com.life_manager.identity_service.auth.application.dto.request.LogoutRequest;
+import com.life_manager.identity_service.auth.application.dto.request.RefreshRequest;
 import com.life_manager.identity_service.auth.application.dto.response.AuthenticationResponse;
 import com.life_manager.identity_service.auth.application.dto.response.IntrospectResponse;
 import com.life_manager.identity_service.auth.application.service.AuthenticationService;
@@ -31,6 +33,7 @@ public class AuthenticationController {
 
     return ApiResponse.<AuthenticationResponse>builder().result(authenticated).build();
     }
+
     @PostMapping("/introspect")
     ApiResponse<IntrospectResponse> introspect(@RequestBody IntrospectRequest introspectRequest) throws ParseException, JOSEException {
 
@@ -39,5 +42,19 @@ public class AuthenticationController {
     return ApiResponse.<IntrospectResponse>builder().
             result(introspect)
             .build();
+    }
+
+    @PostMapping("/logout")
+    ApiResponse<Void> logout(@RequestBody LogoutRequest request) throws ParseException, JOSEException {
+        authenticationService.logout(request);
+        return ApiResponse.<Void>builder().build();
+    }
+
+
+    @PostMapping("/refresh")
+    ApiResponse<AuthenticationResponse> authenticate(@RequestBody RefreshRequest request)
+            throws ParseException, JOSEException {
+        var result = authenticationService.refreshToken(request);
+        return ApiResponse.<AuthenticationResponse>builder().result(result).build();
     }
 }
