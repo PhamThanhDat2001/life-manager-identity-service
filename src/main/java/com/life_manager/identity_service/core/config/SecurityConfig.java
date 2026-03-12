@@ -1,6 +1,7 @@
 package com.life_manager.identity_service.core.config;
 
 import com.life_manager.identity_service.auth.application.enums.Role;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -26,13 +27,16 @@ import javax.crypto.spec.SecretKeySpec;
 public class SecurityConfig {
 
     private final String[] PUBLIC_ENDPOINTS = {
-            "/v1/users","/v1/auth/token", "/v1/auth/introspect"
+            "/v1/users","/v1/auth/token", "/v1/auth/introspect", "/v1/auth/logout", "/v1/auth/refresh"
     };
 
     private final String[] ADMIN_ENDPOINTS = {"/v1/user"};
 
     @Value("${jwt.signerKey}")
     private String SIGNED_KEY;
+
+    @Autowired
+    private CustomJwtDecoder customJwtDecoder;
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
@@ -57,18 +61,18 @@ public class SecurityConfig {
 
         http.oauth2ResourceServer(httpSecurityOAuth2ResourceServerConfigurer ->
                 httpSecurityOAuth2ResourceServerConfigurer.jwt(jwtConfigurer ->
-                        jwtConfigurer.decoder(jwtDecoder()).jwtAuthenticationConverter(jwtAuthenticationConverter()))
+                        jwtConfigurer.decoder(customJwtDecoder).jwtAuthenticationConverter(jwtAuthenticationConverter()))
                         .authenticationEntryPoint(new JwtAuthenticationEntryPoint()));
 
         return http.build();
     }
-
-    @Bean
-    JwtDecoder jwtDecoder() {
-        SecretKeySpec secretKey = new SecretKeySpec(SIGNED_KEY.getBytes(), "HS512");
-        NimbusJwtDecoder jwtDecoder = NimbusJwtDecoder.withSecretKey(secretKey).macAlgorithm(MacAlgorithm.HS512).build();
-        return jwtDecoder;
-    }
+//
+//    @Bean
+//    JwtDecoder jwtDecoder() {
+//        SecretKeySpec secretKey = new SecretKeySpec(SIGNED_KEY.getBytes(), "HS512");
+//        NimbusJwtDecoder jwtDecoder = NimbusJwtDecoder.withSecretKey(secretKey).macAlgorithm(MacAlgorithm.HS512).build();
+//        return jwtDecoder;
+//    }
 
     @Bean
     JwtAuthenticationConverter jwtAuthenticationConverter() {
